@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker - Workout History</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: black; 
+        }
+        .workout-history-container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 20px; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(30, 200, 0);
+            background-color: black;
+
+        }
+        h1, h2 {
+            text-align: center;
+            color: white;
+        }
+        .workout-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: black; 
+            box-shadow: 0 0 10px rgb(30, 200, 0);
+            color: white;
+        }
+        .workout-entry button {
+            padding: 5px 10px;
+            font-size: 12px;
+            background-color: #dc3545; 
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: black; 
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgb(30, 200, 0);
+        }
+        
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <div class="workout-history-container">
+        <h1>Workout History</h1>
+        {% for workout in workouts %}
+            <div class="workout-entry">
+                <p><strong>Exercise:</strong> {{ workout.exercise }}</p>
+                <p><strong>Duration (minutes):</strong> {{ workout.duration }}</p>
+                <p><strong>Calories Burned:</strong> {{ workout.calories_burned }}</p>
+                <form onsubmit="deleteWorkout(event, '{{ workout.id }}')">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function deleteWorkout(event, workoutId) {
+            event.preventDefault(); 
+
+            fetch(`/delete_workout/${workoutId}`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+
+                    event.target.closest('.workout-entry').remove();
+                } else {
+                    console.error('Failed to delete workout');
+                }
+            })
+            .catch(error => {
+                console.error('Network error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

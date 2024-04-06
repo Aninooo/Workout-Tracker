@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black; 
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .chart {
+            width: 100%;
+            height: auto;
+        }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 0 10px rgb(30, 200, 0);
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <div class="chart-container">
+        <canvas id="myChart" class="chart"></canvas>
+    </div>
+    <script>
+        var labels = JSON.parse('{{ labels | tojson | safe }}');
+        var data = JSON.parse('{{ data | tojson | safe }}');
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Workout Duration (minutes)',
+                    data: data,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.2)' 
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.5)' 
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.2)' 
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.5)' 
+                        }
+                    }
+                }
+            }
+        });
+    
+        function updateChart(labels, data) {
+            myChart.data.labels = labels;
+            myChart.data.datasets[0].data = data;
+            myChart.update();
+        }
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    
+</body>
+</html>
