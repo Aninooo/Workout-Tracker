@@ -24,21 +24,18 @@ Fitness Tracker is a web application that allows users to track their workouts a
 
 git clone <repository_url>
 
-markdown
 Copy code
 
 2. Install the required dependencies:
 
 pip install -r requirements.txt
 
-markdown
 Copy code
 
 3. Run the application:
 
 python app.py
 
-vbnet
 Copy code
 
 4. Open a web browser and navigate to `http://localhost:5000` to use the application.
