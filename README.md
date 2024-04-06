@@ -1,3 +1,5 @@
+# Fitness Tracker
+
 Fitness Tracker is a web application that allows users to track their workouts and visualize their fitness data.
 
 ## Features
@@ -54,3 +56,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Author
+
+- Bryan Lomerio
