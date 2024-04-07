@@ -27,22 +27,15 @@
             cursor: pointer; 
             transition: color 0.3s; 
         }
-        h1 {
-    text-align: center;
-    transition: color 0.3s; 
-}
-
-h1:hover {
-    color: green; 
-    cursor: pointer; 
-}
+        h1:hover {
+            color: green; /* Change text color on hover */
+        }
         .form-group {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px; 
-            
             padding: 10px; 
         }
         label {
@@ -57,7 +50,6 @@ h1:hover {
             display: flex;
             justify-content: space-between;
             margin-bottom: 5px;
-            
         }
         .add-button-container {
             position: absolute; 
@@ -85,7 +77,7 @@ h1:hover {
             text-align: center;
             margin-top: 20px;
         }
-        .history-button {
+        .history-button, .chart-button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #000000;
@@ -94,17 +86,11 @@ h1:hover {
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 0 10px rgb(30, 200, 0);
+            transition: background-color 0.3s, color 0.3s; /* Add transition effect */
         }
-        .chart-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgb(30, 200, 0);
+        .history-button:hover, .chart-button:hover {
+            background-color: #5cb85c; /* Change background color on hover */
+            color: white; /* Change text color on hover */
         }
     </style>
 </head>
